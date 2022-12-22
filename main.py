@@ -1,28 +1,26 @@
 import customtkinter
+import current_power
+
+app_window_size = '800x480'
+app_title = 'Sunny Pi'
+app_system_total_power = 7100
+app_widget_padding = 10
 
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-
-        self.geometry("500x300")
-        self.title("small example app")
-        self.minsize(300, 200)
-
-        # create 2x2 grid system
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_columnconfigure((0, 1), weight=1)
         
-        self.textbox = customtkinter.CTkTextbox(master=self)
-        self.textbox.grid(row=0, column=0, columnspan=2, padx=20, pady=(20, 0), sticky="nsew")
+        self.geometry(app_window_size)
+        self.title(app_title)
+        
+        self.current_power = current_power.CurrentPower(self,
+                                                        total_power=app_system_total_power)
+        self.current_power.update_power(5136)
+        self.current_power.grid(row=0,
+                                padx=app_widget_padding,
+                                pady=app_widget_padding)
 
-        self.combobox = customtkinter.CTkComboBox(master=self, values=["Sample text 1", "Text 2"])
-        self.combobox.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
-        self.button = customtkinter.CTkButton(master=self, command=self.button_callback, text="Insert Text")
-        self.button.grid(row=1, column=1, padx=20, pady=20, sticky="ew")
-
-    def button_callback(self):
-        self.textbox.insert("insert", self.combobox.get() + "\n")
 
 if __name__ == "__main__":
-  app = App()
-  app.mainloop()
+    app = App()
+    app.mainloop()
