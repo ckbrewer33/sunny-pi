@@ -16,7 +16,10 @@ class App(customtkinter.CTk):
         self.title(app_title)
         
         self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure((0, 0), weight=1)
         self.grid_columnconfigure((0, 1), weight=1)
+        self.grid_columnconfigure((0, 2), weight=1)
+        
 
         self.init_current_power_widget()
         self.init_pv_energy_widget()
@@ -29,7 +32,9 @@ class App(customtkinter.CTk):
         self.current_power.grid(row=0,
                                 column=0,
                                 padx=app_widget_padding,
-                                pady=app_widget_padding)
+                                pady=app_widget_padding,
+                                sticky="nwe")
+        self.current_power.grid_propagate(0)
 
     def init_pv_energy_widget(self):
         self.pv_energy = pv_energy_widget.PvEnergyWidget(self)
@@ -38,7 +43,9 @@ class App(customtkinter.CTk):
         self.pv_energy.grid(row=0,
                             column=1,
                             padx=app_widget_padding,
-                            pady=app_widget_padding)
+                            pady=app_widget_padding,
+                            sticky="nwe")
+        self.pv_energy.grid_propagate(0)
 
     def init_weather_widget(self):
       self.weather_widget = weather_widget.WeatherWidget(self)
@@ -47,7 +54,9 @@ class App(customtkinter.CTk):
       self.weather_widget.grid(row=0,
                                column=2,
                                padx=app_widget_padding,
-                               pady=app_widget_padding)
+                               pady=app_widget_padding,
+                               sticky="nwe")
+      self.weather_widget.grid_propagate(0)
 
 if __name__ == "__main__":
     app = App()

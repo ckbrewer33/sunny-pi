@@ -7,5 +7,5 @@ class SunnyPiFrame(customtkinter.CTkFrame):
 
         self.configure(corner_radius=8,
                        fg_color='white',
-                       width=300,
-                       height=200)
+                       height=115,
+                       width=300)
